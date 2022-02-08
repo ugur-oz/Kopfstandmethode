@@ -10,20 +10,54 @@ import java.util.List;
 
 @Controller
 public class ReverseController {
-    public static List<Losung> losungList = new ArrayList<>();
+    public static List<LosungForm> losungFormList = new ArrayList<>();
+    public static List<ProblemForm> problemFormList = new ArrayList<>();
+    public static List<VerschlimmerungForm> verschlimmerungFormList = new ArrayList<>();
 
     @GetMapping("/")
-    public String getLosungForm(Model model) {
-      model.addAttribute("saveLosungForm",new Losung());
-       // losungList.add(new Losung());
+    public String getProblemForm(Model model) {
+        model.addAttribute("saveProblemForm", new ProblemForm());
+        return "problemForm";
+    }
 
+    @PostMapping("/saveProblemForm")
+    public String saveProblemForm(Model model, ProblemForm problemForm) {
+        model.addAttribute("saveProblemForm", new ProblemForm());
+        problemFormList.add(problemForm);
+        System.out.println(problemFormList);
+        return "problemForm";
+    }
+
+    @GetMapping("/verschlimm")
+    public String getVerschlimmerungForm(Model model) {
+        model.addAttribute("saveVerschlimmerungForm", new VerschlimmerungForm());
+        model.addAttribute("problemFormList", problemFormList);
+        return "verschlimmerungForm";
+    }
+
+    @PostMapping("/verschlimm")
+    public String saveVerschlimmerungForm(Model model, VerschlimmerungForm verschlimmerungForm,ProblemForm problemForm) {
+        model.addAttribute("saveVerschlimmerungForm", new VerschlimmerungForm());
+        model.addAttribute("problemFormList", problemFormList);
+        model.addAttribute("problemForm",problemForm);
+        verschlimmerungFormList.add(verschlimmerungForm);
+        problemFormList.get(verschlimmerungForm.getIndexOfProblem()).getVerschlimm().add(verschlimmerungForm);
+        System.out.println(verschlimmerungFormList);
+        System.out.println(problemFormList);
+        return "verschlimmerungForm";
+    }
+
+    @GetMapping("/losung")
+    public String getLosungForm(Model model) {
+        model.addAttribute("saveLosungForm", new LosungForm());
         return "losungForm";
     }
-    @PostMapping("/saveLosungForm")
-    public String saveLosungForm(Model model,Losung losung) {
-        model.addAttribute("saveLosungForm",new Losung());
-        losungList.add(losung);
-        System.out.println(losungList);
+
+    @PostMapping("/losung")
+    public String getLosungForm(Model model, LosungForm losungForm ) {
+        model.addAttribute("saveLosungForm", new LosungForm());
         return "losungForm";
     }
+
+
 }

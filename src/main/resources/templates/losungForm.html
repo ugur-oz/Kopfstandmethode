@@ -183,7 +183,12 @@
   background-color:#F8F4F9;
 }
 .footer-basic {
-
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 110px;
+    padding:15px;
   margin-top:100px;
   padding:5px 5;
   background-color:#afc5ff;
@@ -240,8 +245,8 @@
   font-size:15px;
   color:#aaa;
   margin-bottom:0;
-}
 
+}
 
 
 
@@ -251,16 +256,18 @@
 <body>
 <div class="header-dark">
     <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search" style="background-color:#afc5ff;">
-        <div class="container-fluid"><a class="navbar-brand" href="#">Reverse Brainstorming</a>
+        <div class="container-fluid"><a class="navbar-brand" href="https://www.ask-flip.com/method/9?localeCode=de">Was
+            ist Reverse-Brainstorming ?</a>
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
                     class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse"
                  id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Was ist Reverse-Brainstorming
-                        ?</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Verschlimmerung</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Lösungsverschläge</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/">Problembeschreibung</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/verschlimm">Verschlimmerung</a>
+                    </li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/losung">Lösungsverschläge</a>
+                    </li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#">Ansicht</a></li>
                 </ul>
                 <form class="form-inline mr-auto" target="_self">
@@ -273,20 +280,25 @@
         <div class="row">
             <div class="col-md-8 offset-md-2 ">
                 <hr style="height:2px;border-width:0;color:gray;background-color:white">
-                <h1 class="text-center text-dark" style="margin:auto;"> Jetzt solltest du das Problem genauer
-                    beschreiben.<br></h1>
+                <h1 class="text-center text-dark" style="margin:auto;"> Sammeln Sie Lösungen<br></h1>
                 <hr style="height:2px;border-width:0;color:gray;background-color:white">
-                <h6 class="text-center .text-dark">(Vergisst du bitte nicht, Je besser du es definierst, desto schneller
-                    findest du eine Lösung.)</h6>
-                <div class="form-floating" style="margin-top:100px;">
-                 
-                </div>
-                <form class="form" method="post" th:action="saveLosungForm" th:object="${saveLosungForm}">
-                    <textarea th:field="*{losung}" class="form-control"
-                              placeholder="Du kannst hier klicken und schreiben"
-                              style="height: 200px"> </textarea>
-                    <label for="floatingTextarea2">Problembeschreibung</label>
-                    <button type="submit" class="btn btn-info" style="float: right; ">Speichern</button>
+
+                <form class="form" method="post" th:action="losung" th:object="${saveLosungForm}">
+                    <label>Welche Verschlimmerung möchtest du gelöst haben ?</label>
+                    <select style="width: 450px;" th:field="*{indexOfVerschlimmerung}">
+
+                        <option th:each="k : ${verschlimmerungFormList}"
+                                th:text="${k.verschlimmerungForm}"
+                                th:value="${verschlimmerungFormList.indexOf(k)}"></option>
+                        <textarea th:field="*{losung}" class="form-control"
+                                  placeholder="Du kannst hier klicken und schreiben"
+                                  style="height: 50px ;margin-top:50px;"></textarea>
+                        <label for="floatingTextarea2">Schreiben Sie hier clevere Lösungen</label>
+                        <button type="submit" class="btn btn-success" style="float: right; margin-top:5px; ">Speichern
+                        </button>
+                        <button type="reset" class="btn btn-danger"
+                                style="float: right;margin-right:10px; margin-top:5px; ">Löschen
+                        </button>
                 </form>
             </div>
         </div>
@@ -311,7 +323,7 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-
+</div>
 </body>
 
 </html>

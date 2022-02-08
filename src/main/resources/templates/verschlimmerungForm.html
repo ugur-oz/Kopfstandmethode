@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Untitled</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+
 </head>
 <style>
    body {background-color:#90E0F3;}
@@ -181,7 +183,12 @@
   background-color:#F8F4F9;
 }
 .footer-basic {
-
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 110px;
+    padding:15px;
   margin-top:100px;
   padding:5px 5;
   background-color:#afc5ff;
@@ -235,27 +242,27 @@
 .footer-basic .copyright {
   margin-top:0 px;
   text-align:center;
-  font-size:10px;
+  font-size:15px;
   color:#aaa;
   margin-bottom:0;
+
 }
-
-
 
 </style>
 
 <body>
 <div class="header-dark">
     <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search" style="background-color:#afc5ff;">
-        <div class="container-fluid"><a class="navbar-brand" href="#">Reverse Brainstorming</a>
+        <div class="container-fluid"><a class="navbar-brand" href="https://www.ask-flip.com/method/9?localeCode=de">Was
+            ist Reverse-Brainstorming ?</a>
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
                     class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse"
                  id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Was ist Reverse-Brainstorming ?</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Verschlimmerung</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Lösungsverschläge</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/">Problembeschreibung</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/verschlimm">Verschlimmerung</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/losung">Lösungsverschläge</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#">Ansicht</a></li>
                 </ul>
                 <form class="form-inline mr-auto" target="_self">
@@ -268,42 +275,48 @@
         <div class="row">
             <div class="col-md-8 offset-md-2 ">
                 <hr style="height:2px;border-width:0;color:gray;background-color:white">
-                <h1 class="text-center text-dark" style="margin:auto;"> Jetzt solltest du das Problem genaue
-                    beschreiben.<br></h1>
+                <h1 class="text-center text-dark" style="margin:auto;"> Sammeln Sie Ideen wie es nicht geht nämlich
+                    verschlimmern.<br></h1>
                 <hr style="height:2px;border-width:0;color:gray;background-color:white">
-                <h6 class="text-center .text-dark">(Vergisst du bitte nicht, Je besser du es definierst, desto schneller
-                    findest du eine Lösung.)</h6>
-                <div class="form-floating" style="margin-top:100px;">
-                    <textarea class="form-control" placeholder="Du kannst hier klicken und schreiben"
-                              id="floatingTextarea2" style="height: 200px"></textarea>
-                    <label for="floatingTextarea2">Problembeschreibung</label>
-                </div>
+
+                <form class="form" method="post" th:action="verschlimm" th:object="${saveVerschlimmerungForm}">
+                    <label>Dieses Problem möchtest du lösen</label>
+                    <div th:field="${problemForm}" ></div>
+                    <select style="width: 450px;" th:field="*{indexOfProblem}">
+
+                        <option th:each="k : ${problemFormList}"
+                                th:text="${k.getProblemForm}"
+                                th:value="${problemFormList.indexOf(k)}"></option>
+                    <textarea  th:field="*{verschlimmerungForm}" class="form-control" placeholder="Du kannst hier klicken und schreiben"
+                              style="height: 50px ;margin-top:50px;"></textarea>
+                    <label for="floatingTextarea2">Lass uns verschlimmern</label>
+                    <button type="submit" class="btn btn-success" style="float: right; margin-top:5px; ">Speichern</button>
+                    <button type="reset" class="btn btn-danger" style="float: right;margin-right:10px; margin-top:5px; ">Löschen</button>
+                </form>
             </div>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+        <div class="footer-basic">
+            <footer>
+                <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
+                        class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a
+                        href="#"><i class="icon ion-social-facebook"></i></a></div>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#">Home</a></li>
+                    <li class="list-inline-item"><a href="#">Services</a></li>
+                    <li class="list-inline-item"><a href="#">About</a></li>
+                    <li class="list-inline-item"><a href="#">Terms</a></li>
+                    <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                </ul>
+                <p class="copyright">Company Ugur LaLaLa © 2022</p>
+            </footer>
+        </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-
-<div class="footer-basic">
-    <footer>
-        <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
-                class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a
-                href="#"><i class="icon ion-social-facebook"></i></a></div>
-        <ul class="list-inline">
-            <li class="list-inline-item"><a href="#">Home</a></li>
-            <li class="list-inline-item"><a href="#">Services</a></li>
-            <li class="list-inline-item"><a href="#">About</a></li>
-            <li class="list-inline-item"><a href="#">Terms</a></li>
-            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-        </ul>
-        <p class="copyright">Company Name © 2022</p>
-    </footer>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-
 </body>
 
 </html>
