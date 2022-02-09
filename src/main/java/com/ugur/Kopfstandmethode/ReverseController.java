@@ -46,17 +46,22 @@ public class ReverseController {
     }
 
     @GetMapping("/losung")
-    public String getLosungForm(Model model, VerschlimmerungForm verschlimmerungForm ) {
+    public String getLosungForm(Model model, VerschlimmerungForm verschlimmerungForm) {
         model.addAttribute("verschlimmerungFormList", verschlimmerungFormList);
         model.addAttribute("saveLosungForm", new LosungForm());
-model.addAttribute("verschlimmerungForm", verschlimmerungForm);
+        model.addAttribute("verschlimmerungForm", verschlimmerungForm);
         //     problemFormList.get(verschlimmerungForm.getIndexOfProblem()).getVerschlimm().add(verschlimmerungForm);
+
+         //    verschlimmerungFormList.get(verschlimmerungFormList.getIndexOfVerschlimmerung()).getLosung().add(LosungForm)
         return "losungForm";
     }
 
     @PostMapping("/losung")
     public String getLosungForm(Model model, LosungForm losungForm) {
+        model.addAttribute("verschlimmerungFormList",verschlimmerungFormList);
         model.addAttribute("saveLosungForm", new LosungForm());
+        verschlimmerungFormList.get(losungForm.getIndexOfVerschlimmerung()).getLosungen().add(losungForm);
+        System.out.println(verschlimmerungFormList.get(losungForm.getIndexOfVerschlimmerung()));
         System.out.println(losungForm);
         return "losungForm";
     }
