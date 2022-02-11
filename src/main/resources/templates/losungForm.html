@@ -359,7 +359,7 @@ div.rotate-2 {
 
 
                         <p>
-                            <div style="overflow-wrap:break-word;float:left; margin-left:5px;background-color:#fdffb6" class="rotate-1"
+                            <div style="overflow-wrap:break-word;float:left; margin-left:5px; margin-top:30px;background-color:#fdffb6; height:auto; width:150px; " class="rotate-1"
                                  th:each="k : ${verschlimmerungFormList}">
                                 <h4 th:text="${k.verschlimmerungForm}"></h4>
                                 <p th:each="l : ${k.getLosungen()}" th:text="${l.losung}"></p>
