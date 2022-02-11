@@ -28,7 +28,7 @@ public class Configuration extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .withDefaultSchema()
                 .withUser(User.withUsername("user")
-                .password(passwordEncoder().encode("wilkommen"))
+                .password(passwordEncoder().encode("willkommen"))
                 .roles("USER"));
     }
     @Bean
