@@ -250,6 +250,7 @@
 
 
 
+
 </style>
 
 <body>
@@ -267,7 +268,7 @@
                     </li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/losung">Lösungsverschläge</a>
                     </li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Ansicht</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/ansicht">Ansicht</a></li>
                 </ul>
                 <form class="form-inline mr-auto" target="_self">
                 </form>
@@ -282,16 +283,13 @@
                 <h1 class="text-center text-dark" style="margin:auto;"> Jetzt solltest du das Problem genauer
                     beschreiben.<br></h1>
                 <hr style="height:2px;border-width:0;color:gray;background-color:white">
-                <h6 class="text-center .text-dark">(Vergisst du bitte nicht, Je besser du es definierst, desto schneller
-                    findest du eine Lösung.)</h6>
 
                 <form class="form form-floating" method="post" th:action="saveProblemForm"
                       th:object="${saveProblemForm}">
                     <textarea th:field="*{problemForm}" class="form-control"
-                              placeholder="Du kannst hier klicken und schreiben"
-                              style="height: 200px"> </textarea>
+                              placeholder="Vergisst du bitte nicht, Je besser du es definierst, desto schneller findest du eine Lösung."
+                              style="height: 110px ;margin-top:10px;"></textarea>
 
-                    <label for="floatingTextarea2">Problembeschreibung</label>
                     <a href="/verschlimm" type="button" role="button" class="btn btn-primary"
                        style="float: right;margin-left:10px;margin-top:5px; ">Nächste Seite</a>
                     <button type="submit" class="btn btn-success" style="float: right; margin-top:5px">Speichern
@@ -299,7 +297,6 @@
                     <button type="reset" class="btn btn-danger"
                             style="float: right;margin-right:10px ;margin-top:5px; ">Löschen
                     </button>
-                    Speichern--</button>
 
 
                 </form>

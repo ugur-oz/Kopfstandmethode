@@ -245,8 +245,58 @@
   font-size:15px;
   color:#aaa;
   margin-bottom:0;
-
 }
+
+ul.notes li div {
+  text-decoration: none;
+  color: #000;
+  display: block;
+  height: 210px;
+  width: 210px;
+  padding: 1em;
+  -moz-box-shadow: 5px 5px 7px #212121;
+  -webkit-box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+  box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+  -moz-transition: -moz-transform 0.15s linear;
+  -o-transition: -o-transform 0.15s linear;
+  -webkit-transition: -webkit-transform 0.15s linear;
+}
+
+ul.notes li {
+  margin: 20px 40px 50px 0px;
+  float: left;
+}
+
+ul.notes li, ul.tag-list li {
+  list-style: none;
+}
+
+ul.notes li div small {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 10px;
+}
+
+div.rotate-1 {
+  -webkit-transform: rotate(-6deg);
+  -o-transform: rotate(-6deg);
+  -moz-transform: rotate(-6deg);
+}
+
+div.rotate-2 {
+  -o-transform: rotate(4deg);
+  -webkit-transform: rotate(4deg);
+  -moz-transform: rotate(4deg);
+  position: relative;
+  top: 5px;
+}
+
+
+
+
+
+
 
 
 
@@ -268,7 +318,7 @@
                     </li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/losung">Lösungsverschläge</a>
                     </li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Ansicht</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/ansicht">Ansicht</a></li>
                 </ul>
                 <form class="form-inline mr-auto" target="_self">
                 </form>
@@ -276,32 +326,57 @@
                     class="btn btn-light action-button" role="button" href="#">Sign Up</a></div>
         </div>
     </nav>
+
+
     <div class="container hero">
         <div class="row">
-            <div class="col-md-8 offset-md-2 ">
+
+            <div class="col-sm-8 offset-md-2">
                 <hr style="height:2px;border-width:0;color:gray;background-color:white">
                 <h1 class="text-center text-dark" style="margin:auto;"> Sammeln Sie Lösungen<br></h1>
                 <hr style="height:2px;border-width:0;color:gray;background-color:white">
 
                 <form class="form" method="post" th:action="losung" th:object="${saveLosungForm}">
-                    <label>Welche Verschlimmerung möchtest du gelöst haben ?</label>
-                    <select style="width: 450px;" th:field="*{indexOfVerschlimmerung}">
+                    <h3>Welche Verschlimmerung möchtest du gelöst haben ?</h3>
+
+                    <select style="width: 725px;" th:field="*{indexOfVerschlimmerung}">
 
                         <option th:each="k : ${verschlimmerungFormList}"
                                 th:text="${k.verschlimmerungForm}"
                                 th:value="${verschlimmerungFormList.indexOf(k)}"></option>
                         <textarea th:field="*{losung}" class="form-control"
-                                  placeholder="Du kannst hier klicken und schreiben"
+                                  placeholder="Schreiben Sie hier clevere Lösungen"
                                   style="height: 50px ;margin-top:50px;"></textarea>
-                        <label for="floatingTextarea2">Schreiben Sie hier clevere Lösungen</label>
-                        <button type="submit" class="btn btn-success" style="float: right; margin-top:5px; ">Speichern
+
+
+                        <a href="/ansicht" type="button" role="button" class="btn btn-primary"
+                           style="float: right;margin-left:10px;margin-top:5px; ">Nächste Seite</a>
+                        <button type="submit" class="btn btn-success" style="float: right; margin-top:5px">Speichern
                         </button>
                         <button type="reset" class="btn btn-danger"
-                                style="float: right;margin-right:10px; margin-top:5px; ">Löschen
+                                style="float: right;margin-right:10px ;margin-top:5px; ">Löschen
                         </button>
+
+
+                        <p>
+                            <div style="overflow-wrap:break-word;float:left; margin-left:5px;background-color:#fdffb6" class="rotate-1"
+                                 th:each="k : ${verschlimmerungFormList}">
+                                <h4 th:text="${k.verschlimmerungForm}"></h4>
+                                <p th:each="l : ${k.getLosungen()}" th:text="${l.losung}"></p>
+                            </div>
+                        </p>
+
+
+
+
                 </form>
+
+
             </div>
+
         </div>
+
+
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 
